@@ -13,11 +13,13 @@ dp = Dispatcher(bot)
 dp.filters_factory.bind(IsAdminFilter)
 
 @dp.message_handler(content_types=['new chat members'])
-async def on_user_joined(message: types.Message):
+async def on_user_joined(message):
     await message.delete()
 
-@dp.message_handler(is_admin=True, commands=['ban'], commands_prefix='!/')
-async def cmd_ban(message: types.Message):
+@dp.message_handler( commands=['ban'], commands_prefix='!/')
+async def cmd_ban(message):
+    # if message.id == 'твой id':
+    #     pass
     if not message.reply_to_message :
         await message.reply('Эта команда должна быть ответом на сообщение!')
         return
